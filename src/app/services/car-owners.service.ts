@@ -12,7 +12,7 @@ export class CarOwnersService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getHeroes(): Observable<IOwner[]> {
+  getOwners(): Observable<IOwner[]> {
     return this.http.get<IOwner[]>(this.ownersUrl)
   }
 }

@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="buttons-wrapper">
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Добавить
+    </button>
+    <button mat-raised-button color="primary" [disabled]="disabled">
+      <mat-icon>remove_red_eye</mat-icon>
+      Просмотр
+    </button>
+    <button mat-raised-button color="accent" [disabled]="disabled">
+      <mat-icon>edit</mat-icon>
+      Редактировать
+    </button>
+    <button mat-raised-button color="warn" [disabled]="disabled">
+      <mat-icon>delete</mat-icon>
+      Удалить
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="owners$" class="mat-elevation-z8 table">
+    <!-- LastName Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Фамилия</th>
+      <td mat-cell *matCellDef="let owner">{{ owner.lastName }}</td>
+    </ng-container>
+
+    <!-- FirstName Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>Имя</th>
+      <td mat-cell *matCellDef="let owner">{{ owner.firstName }}</td>
+    </ng-container>
+
+    <!-- MiddleName Column -->
+    <ng-container matColumnDef="middleName">
+      <th mat-header-cell *matHeaderCellDef>Отчество</th>
+      <td mat-cell *matCellDef="let owner">{{ owner.middleName }}</td>
+    </ng-container>
+
+    <!-- Сars Column -->
+    <ng-container matColumnDef="cars">
+      <th mat-header-cell *matHeaderCellDef>Количество машин</th>
+      <td mat-cell *matCellDef="let owner">{{ owner.cars.length }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+
+  <!-- <div>
+    <h3>
+      Click Log
+    </h3>
+  </div>
+
+  <div *ngIf="!clickedRows.size">
+    Clicked rows will be logged here
+  </div>
+
+  <ul>
+    <li *ngFor="let clickedRow of clickedRows">
+      Clicked on {{ clickedRow.name }}
+    </li>
+  </ul> -->
+</div>
