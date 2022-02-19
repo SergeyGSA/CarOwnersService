@@ -1,6 +1,6 @@
 <div class="container">
   <div class="buttons-wrapper">
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="openDialog()">
       <mat-icon>add</mat-icon>
       Добавить
     </button>
@@ -8,7 +8,7 @@
       <mat-icon>remove_red_eye</mat-icon>
       Просмотр
     </button>
-    <button mat-raised-button color="accent" [disabled]="disabled">
+    <button mat-raised-button color="primary" [disabled]="disabled">
       <mat-icon>edit</mat-icon>
       Редактировать
     </button>
@@ -51,20 +51,4 @@
       *matRowDef="let row; columns: displayedColumns"
     ></tr>
   </table>
-
-  <!-- <div>
-    <h3>
-      Click Log
-    </h3>
-  </div>
-
-  <div *ngIf="!clickedRows.size">
-    Clicked rows will be logged here
-  </div>
-
-  <ul>
-    <li *ngFor="let clickedRow of clickedRows">
-      Clicked on {{ clickedRow.name }}
-    </li>
-  </ul> -->
 </div>
