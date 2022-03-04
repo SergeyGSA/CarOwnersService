@@ -1,42 +1,91 @@
-<form class="form">
+<form
+  class="form"
+  [formGroup]="ownerForm"
+  novalidate
+  (ngSubmit)="ownerSubmit()"
+>
   <h2 mat-dialog-title class="title">Владелец</h2>
   <mat-dialog-content class="mat-typography">
     <div class="owner">
       <mat-form-field appearance="legacy">
         <mat-label>Фамилия</mat-label>
-        <input matInput />
+        <input matInput formControlName="lastName" />
+        <mat-error
+          *ngIf="
+            ownerForm.controls['lastName'].invalid &&
+            ownerForm.controls['lastName'].touched
+          "
+        >
+          Это поле обязательно
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-label>Имя</mat-label>
-        <input matInput />
+        <input matInput formControlName="firstName" />
+        <mat-error
+          *ngIf="
+            ownerForm.controls['firstName'].invalid &&
+            ownerForm.controls['firstName'].touched
+          "
+        >
+          Это поле обязательно
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-label>Отчество</mat-label>
-        <input matInput />
+        <input matInput formControlName="middleName" />
+        <mat-error
+          *ngIf="
+            ownerForm.controls['middleName'].invalid &&
+            ownerForm.controls['middleName'].touched
+          "
+        >
+          Это поле обязательно
+        </mat-error>
       </mat-form-field>
     </div>
 
     <h3 class="title">Автомобили</h3>
-    <div class="car-wrapper">
+    <div class="car-wrapper" formGroupName="cars">
       <mat-form-field appearance="legacy">
         <mat-label>Номер</mat-label>
-        <input matInput />
+        <input matInput formControlName="carNumber" />
+        <mat-error *ngIf="carNumber?.errors?.required && carNumber.touched">
+          Это поле обязательно
+        </mat-error>
+        <mat-error *ngIf="carNumber.invalid && carNumber.touched">
+          Номер должен быть в формате 2 большие латинские буквы, 4 цифры, 2
+          большие латинские буквы (пример AX1111HP);
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-label>Марка</mat-label>
-        <input matInput />
+        <input matInput formControlName="manufacturer" />
+        <mat-error *ngIf="manufacturer.invalid && manufacturer.touched">
+          Это поле обязательно
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-label>Модель</mat-label>
-        <input matInput />
+        <input matInput formControlName="model" />
+        <mat-error *ngIf="model.invalid && model.touched">
+          Это поле обязательно
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-label>Год</mat-label>
-        <input matInput />
+        <input matInput type="number" formControlName="manufactureYear" />
+        <mat-error
+          *ngIf="manufactureYear?.errors?.required && manufactureYear.touched"
+        >
+          Это поле обязательно
+        </mat-error>
+        <mat-error *ngIf="manufactureYear.invalid && manufactureYear.touched">
+          Год должен быть от 1990 до 2022
+        </mat-error>
       </mat-form-field>
       <button mat-icon-button color="warn">
         <mat-icon style="color: #f44336;">delete</mat-icon>
-        <!-- delete -->
       </button>
     </div>
   </mat-dialog-content>
@@ -46,7 +95,12 @@
       Добавить автомобиль
     </button>
     <div>
-      <button mat-raised-button color="primary">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="ownerForm.invalid || ownerForm.disabled"
+      >
         <mat-icon>save</mat-icon>
         Сохранить
       </button>
